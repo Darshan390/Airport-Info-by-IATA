@@ -1,0 +1,120 @@
+<html>
+
+<head>
+	<title>Airport</title>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+		integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+		crossorigin="anonymous" referrerpolicy="no-referrer" />
+	<link rel="stylesheet" href="airportcss.css" />
+
+
+
+	</style>
+</head>
+
+<body>
+	<div>
+		<div class="backimg" class="containerr">
+			<h1>Airport Information by its IATA </h1>
+			<h2>Enter IATA code below</h2>
+			<div class="search-box">
+				<form action="" class="search-form">
+					<button id="submit" class="fa-solid fa-magnifying-glass" onclick="airportInfo(iata.value)"></button>
+					<input type="text" placeholder="Search" class="search" id="iata" autocomplete="off">
+				</form>
+
+
+			</div>
+
+		</div>
+		<div align="center" class="info">
+			<div>
+
+				<table class="container">
+					<thead>
+						<tr>
+							<th>
+								<h3>TAG</h3>
+							</th>
+							<th>
+								<h3>INFO</h3>
+							</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>Id </td>
+							<td class="ttd" id="id"></td>
+						</tr>
+						<tr>
+							<td>city:</td>
+							<td class="ttd" id="city"></td>
+						</tr>
+						<tr>
+							<td>Name</td>
+							<td class="ttd" id="Name"></td>
+						</tr>
+						<tr>
+							<td>Phone</td>
+							<td class="ttd" id="phone"></td>
+						</tr>
+						<tr>
+							<td>Postal_code</td>
+							<td class="ttd" id="postal_code"></td>
+						</tr>
+						<tr>
+							<td>country</td>
+							<td class="ttd" id="country"></td>
+						</tr>
+						<tr>
+							<td>website</td>
+							<td class="ttd" id="website"></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+
+		<script>
+
+
+			const options = {
+				method: 'GET',
+				headers: {
+					'X-RapidAPI-Key': '5546f0f203mshfa4e8ed15d2a5d6p1a2308jsn522514aa1049',
+					'X-RapidAPI-Host': 'airport-info.p.rapidapi.com'
+				}
+			};
+
+
+			const airportInfo = (iata) => {
+				iata.innerHTML = iata
+
+
+				fetch("https://airport-info.p.rapidapi.com/airport?iata=" + iata, options)
+					.then((response) => { return response.json() })
+					.then((data) => {
+						console.log(data)
+						id.innerHTML = data.id
+						city.innerHTML = data.city
+						Name.innerHTML = data.name
+						phone.innerHTML = data.phone
+						postal_code.innerHTML = data.postal_code
+						country.innerHTML = data.country
+						website.innerHTML = data.website
+
+					})
+			}
+
+			submit.addEventListener("click", (event) => {
+
+				event.preventDefault()
+				airportInfo(iata.value)
+			})
+
+
+		</script>
+
+</body>
+
+</html>
